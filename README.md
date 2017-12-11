@@ -1,5 +1,7 @@
 # Neon
 
+[Docs](https://docs.google.com/document/d/1TAuL5HrCkLS-C2udB2wZFIHqzq8UMkoIkDKcNLpW6ZU/edit?usp=sharing) | [Discord](https://discord.gg/4NzsPu2)
+
 *Overloading must be the key to golf.*
 
 Neon is a stack-based golfing language written in Python 3.
