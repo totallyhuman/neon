@@ -1,6 +1,6 @@
 # Neon
 
-[Docs](https://docs.google.com/document/d/1TAuL5HrCkLS-C2udB2wZFIHqzq8UMkoIkDKcNLpW6ZU/edit?usp=sharing) | [Discord](https://discord.gg/4NzsPu2)
+[Docs](https://docs.google.com/document/d/1TAuL5HrCkLS-C2udB2wZFIHqzq8UMkoIkDKcNLpW6ZU/edit?usp=sharing) | [Discord](https://discord.gg/4NzsPu2) | [Chat.SE](https://chat.stackexchange.com/rooms/71094/neon)
 
 *Overloading must be the key to golf.*
 
