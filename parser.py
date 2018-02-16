@@ -5,7 +5,7 @@ from modgrammar import *
 
 
 class Program(Grammar):
-    grammar = ZERO_OR_MORE(REF('Data'), REF('Loop'), REF('Command'))
+    grammar = ZERO_OR_MORE(REF('Data'))
 
 class Data(Grammar):
     grammar = REF('Number') | REF('Text') | REF('List')
@@ -42,13 +42,10 @@ class Text(Grammar):
     grammar = REF('String') | REF('Character')
 
 class String(Grammar):
-    grammar = REF('Closed') | REF('UnclosedLeft') | REF('UnclosedRight')
+    grammar = REF('Closed') | REF('UnclosedRight')
 
 class Closed(Grammar):
     grammar = ('«', ZERO_OR_MORE(REF('ValidCharacter')), '»')
-
-class UnclosedLeft(Grammar):
-    grammar = (OPTIONAL('«'), ZERO_OR_MORE(REF('ValidCharacter')), '»')
 
 class UnclosedRight(Grammar):
     grammar = ('«', ZERO_OR_MORE(REF('ValidCharacter')), EOF)
@@ -61,9 +58,3 @@ class Character(Grammar):
 
 class List(Grammar):
     grammar = ('[', ZERO_OR_MORE(REF('Data') | SPACE), ']')
-
-class Loop(Grammar):
-    grammar = 'lol'  # TODO
-
-class Command(Grammar):
-    grammar = 'lol'  # TODO
