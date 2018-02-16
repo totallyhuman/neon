@@ -100,4 +100,5 @@ ENV/
 # mypy
 .mypy_cache/
 
+# Visual Studio Code leaving stuff around
 .vscode
