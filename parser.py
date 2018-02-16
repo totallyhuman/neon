@@ -42,12 +42,12 @@ class Text(Grammar):
     grammar = REF('String') | REF('Character')
 
 class String(Grammar):
-    grammar = REF('Closed') | REF('UnclosedRight')
+    grammar = REF('ClosedString') | REF('RightUnclosedString')
 
-class Closed(Grammar):
+class ClosedString(Grammar):
     grammar = ('«', ZERO_OR_MORE(REF('ValidCharacter')), '»')
 
-class UnclosedRight(Grammar):
+class RightUnclosedString(Grammar):
     grammar = ('«', ZERO_OR_MORE(REF('ValidCharacter')), EOF)
 
 class ValidCharacter(Grammar):
@@ -57,4 +57,10 @@ class Character(Grammar):
     grammar = ('‹', ANY)
 
 class List(Grammar):
+    grammar = REF('ClosedList') | REF('RightUnclosedList')
+
+class ClosedList(Grammar):
     grammar = ('[', ZERO_OR_MORE(REF('Data') | SPACE), ']')
+
+class RightUnclosedList(Grammar):
+    grammar = ('[', ZERO_OR_MORE(REF('Data') | SPACE), EOF)
