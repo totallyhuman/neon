@@ -5,13 +5,15 @@ from modgrammar import *
 
 
 class Program(Grammar):
-    grammar = ZERO_OR_MORE(REF('Data'))
+    grammar = (OPTIONAL(REF('LeftUnclosedString') | REF('LeftUnclosedList')), ZERO_OR_MORE(REF('Data')))
 
 class Data(Grammar):
     grammar = REF('Number') | REF('Text') | REF('List')
 
 class Number(Grammar):
-    grammar = REF('Complex') | REF('ScientificNotation') | REF('Float') \
+    grammar = REF('Complex') \
+            | REF('ScientificNotation') \
+            | REF('Float') \
             | REF('Integer')
 
 class Integer(Grammar):
@@ -24,16 +26,20 @@ class NegativeInteger(Grammar):
     grammar = ('-', ZERO_OR_MORE(REF('Digit')))
 
 class Float(Grammar):
-    grammar = (OPTIONAL(REF('Integer')), '.',
+    grammar = (OPTIONAL(REF('Integer')),
+               '.',
                OPTIONAL(REF('PositiveInteger')))
 
 class ScientificNotation(Grammar):
-    grammar = (OPTIONAL(REF('Integer') | REF('Float')), 'e',
+    grammar = (OPTIONAL(REF('Integer') | REF('Float')),
+               'e',
                OPTIONAL(REF('Integer') | REF('Float')))
 
 class Complex(Grammar):
-    grammar = (OPTIONAL(REF('Integer') | REF('Float') | \
-               REF('ScientificNotation')), 'j')
+    grammar = (OPTIONAL(REF('Integer') \
+                      | REF('Float') \
+                      | REF('ScientificNotation')),
+               'j')
 
 class Digit(Grammar):
     grammar = OR('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
@@ -46,6 +52,9 @@ class String(Grammar):
 
 class ClosedString(Grammar):
     grammar = ('«', ZERO_OR_MORE(REF('ValidCharacter')), '»')
+
+class LeftUnclosedString(Grammar):
+    grammar = (ZERO_OR_MORE(REF('ValidCharacter')), '»')
 
 class RightUnclosedString(Grammar):
     grammar = ('«', ZERO_OR_MORE(REF('ValidCharacter')), EOF)
@@ -61,6 +70,9 @@ class List(Grammar):
 
 class ClosedList(Grammar):
     grammar = ('[', ZERO_OR_MORE(REF('Data') | SPACE), ']')
+
+class LeftUnclosedList(Grammar):
+    grammar = (ZERO_OR_MORE(REF('Data') | SPACE), ']')
 
 class RightUnclosedList(Grammar):
     grammar = ('[', ZERO_OR_MORE(REF('Data') | SPACE), EOF)
