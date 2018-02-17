@@ -1,6 +1,6 @@
 # Neon
 
-[Docs](https://docs.google.com/document/d/1TAuL5HrCkLS-C2udB2wZFIHqzq8UMkoIkDKcNLpW6ZU/edit?usp=sharing) | [Discord](https://discord.gg/Kcv7am5) | [Chat.SE](https://chat.stackexchange.com/rooms/71094/neon)
+[Discord](https://discord.gg/Kcv7am5) | [Chat.SE](https://chat.stackexchange.com/rooms/71094/neon)
 
 *Overloading must be the key to golf.*
 
@@ -11,3 +11,26 @@ Neon is a stack-based golfing language written in Python 3.
 *Every possible error is just a wasted opportunity to do something useful.*
 
 Neon was created with one purpose in mind: overloads. Essentially, each command implemented in Neon should work for any data type combination it can possibly get.
+
+## Code page
+
+Neon's code page aims to be mostly symbolic.
+
+|    | _0 | _1 | _2 | _3 | _4 | _5 | _6 | _7 | _8 | _9 | _A | _B | _C | _D | _E | _F |
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+| **0_** | `⌀` | `⌁` | `⌃` | `⌄` | `⌅` | `⌆` | `⌇` | `⌈` | `⌉` | `⌊` | `⌋` | **NL** | `⌂` | `⌖` | `⌜` | `⌝` |
+| **1_** | `⁰` | `¹` | `²` | `³` | `⁴` | `⁵` | `⁶` | `⁷` | `⁸` | `⁹` | `¤` | `×` | `⌑` | `÷` | `⌞` | `⌟` |
+| **2_** | **SP** | `!` | `"` | `#` | `$` | `%` | `&` | `'` | `(` | `)` | `*` | `+` | `,` | `-` | `.` | `/` |
+| **3_** | `0` | `1` | `2` | `3` | `4` | `5` | `6` | `7` | `8` | `9` | `:` | `;` | `<` | `=` | `>` | `?` |
+| **4_** | `@` | `A` | `B` | `C` | `D` | `E` | `F` | `G` | `H` | `I` | `J` | `K` | `L` | `M` | `N` | `O` |
+| **5_** | `P` | `Q` | `R` | `S` | `T` | `U` | `V` | `W` | `X` | `Y` | `Z` | `[` | `\` | `]` | `^` | `_` |
+| **6_** | <code>\`</code> | `a` | `b` | `c` | `d` | `e` | `f` | `g` | `h` | `i` | `j` | `k` | `l` | `m` | `n` | `o` |
+| **7_** | `p` | `q` | `r` | `s` | `t` | `u` | `v` | `w` | `x` | `y` | `z` | `{` | `|` | `}` | `~` | `⌗` |
+| **8_** | `⌐` | `¬` | `⌌` | `⌍` | `±` | `⌔` | `⌓` | `○` | `⌕` | `⌤` | `⊠` | `⟨` | `⌶` | `⟩` | `⌬` | `∮` |
+| **9_** | `⌙` | `⌯` | `⌎` | `⌏` | `∓` | `⌰` | `⌱` | `⌽` | `⌳` | `⌲` | `⌴` | `≠` | `≈` | `≡` | `⍂` | `⌮` |
+| **A_** | `⍅` | `⍆` | `⍑` | `⍍` | `⍦` | `⍧` | `∘` | `⌾` | `Δ` | `⍋` | `≎` | `≤` | `≀` | `≥` | `⍁` | `⌭` |
+| **B_** | `√` | `Σ` | `⍊` | `⍔` | `∝` | `∞` | `⍀` | `⍉` | `∇` | `⍒` | `⊢` | `⊣` | `≺` | `≻` | `⊲` | `⊳` |
+| **C_** | `⍬` | `⍭` | `⍳` | `⍴` | `⍵` | `⋮` | `⌿` | `∴` | `⊄` | `∩` | `⊅` | `∈` | `∋` | `∧` | `⊶` | `⊷` |
+| **D_** | `↕` | `↑` | `↔` | `⋅` | `⋱` | `…` | `⋰` | `∵` | `⊂` | `∪` | `⊃` | `∉` | `∌` | `∨` | `∥` | `∦` |
+| **E_** | `←` | `↓` | `→` | `↖` | `↗` | `⊕` | `⊖` | `⊗` | `⊘` | `⊙` | `⊜` | `⋉` | `⋈` | `⋊` | `⏚` | `∀` |
+| **F_** | `⇐` | `↭` | `⇒` | `↙` | `↘` | `π` | `σ` | `θ` | `λ` | `μ` | `φ` | `Ω` | `«` | `»` | `‹` | `›` |

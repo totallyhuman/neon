@@ -5,7 +5,8 @@ from modgrammar import *
 
 
 class Program(Grammar):
-    grammar = (OPTIONAL(REF('LeftUnclosedString') | REF('LeftUnclosedList')), ZERO_OR_MORE(REF('Data')))
+    grammar = (OPTIONAL(REF('LeftUnclosedString') | REF('LeftUnclosedList')),
+               ZERO_OR_MORE(REF('Data')))
 
 class Data(Grammar):
     grammar = REF('Number') | REF('Text') | REF('List')
