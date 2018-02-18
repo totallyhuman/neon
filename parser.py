@@ -6,7 +6,7 @@ from modgrammar import *
 
 class Program(Grammar):
     grammar = (OPTIONAL(REF('LeftUnclosedString') | REF('LeftUnclosedList')),
-               ZERO_OR_MORE(REF('Data')))
+               ZERO_OR_MORE(REF('Data') | REF('Loop') | REF('Command')))
 
 class Data(Grammar):
     grammar = REF('Number') | REF('Text') | REF('List')
@@ -77,3 +77,13 @@ class LeftUnclosedList(Grammar):
 
 class RightUnclosedList(Grammar):
     grammar = ('[', ZERO_OR_MORE(REF('Data') | SPACE), EOF)
+
+class Loop(Grammar):
+    grammar = (OR('∞', '∀', '('), ZERO_OR_MORE(REF('Data') | REF('Loop') | REF('Command')), ')' | EOF)
+
+class Command(Grammar):
+    grammar = OR(*'⌀⌁⌃⌄⌅⌆⌇⌈⌉⌊⌋⌂⌖⌜⌝⁰¹²³⁴⁵⁶⁷⁸⁹¤×⌑÷⌞⌟!"#$%&\'*+,-./:;<=>?@ABCDEF'
+                  'GHIJKLMNOPQRSTUVWXYZ\^_`abcdefghijklmnopqrstuvwxyz{``}~⌐¬⌌'
+                  '⌍±⌔⌓○⌕⌤⊠⟨⌶⟩⌬∮⌙⌯⌎⌏∓⌰⌱⌽⌳⌲⌴≠≈≡⍂⌮⍅⍆⍑⍍⍦⍧∘⌾Δ⍋≎≤≀≥⍁⌭√Σ⍊⍔∝⍀⍉∇⍒⊢⊣≺≻'
+                  '⊲⊳⍬⍭⍳⍴⍵⋮⌿∴⊄∩⊅∈∋∧⊶⊷↕↑↔⋅⋱…⋰∵⊂∪⊃∉∌∨∥∦←↓→↖↗⊕⊖⊗⊘⊙⊜⋉⋈⋊⏚⇐↭⇒↙↘πσθλ'
+                  'μφΩ›')
