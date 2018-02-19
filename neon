@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import argparse
+
+import neon
+
+parser = argparse.ArgumentParser(
+    prog = 'neon',
+    description = 'Interpreter for the Neon golfing language.',
+    add_help = True
+)
+
+parser.add_argument('-e', '--encoding',
+                    action = 'store_true',
+                    help = 'read a Neon program in its custom code page')
+parser.add_argument('file',
+                    help = 'file with Neon program to be read')
+
+args = parser.parse_args()
+
+neon.execute(open(args.file, mode = 'rb'), args.encoding)
