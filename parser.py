@@ -84,7 +84,7 @@ class RightUnclosedList(Grammar):
 class Loop(Grammar):
     grammar = (OR('∞', '∀', '(', '⟨', '⟩'),
                ZERO_OR_MORE(REF('Data') | REF('Loop') | REF('Command')),
-               ')' | EOF)
+               ')' | EOL)
 
 class Command(Grammar):
     grammar = OR(*'⌀⌁⌃⌄⌅⌆⌇⌈⌉⌊⌋⌂⌖⌜⌝⁰¹²³⁴⁵⁶⁷⁸⁹¤×⌑÷⌞⌟!"#$%&\'*+,-./:;<=>?@ABCDEF'
