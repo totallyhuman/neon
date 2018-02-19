@@ -5,8 +5,11 @@ from modgrammar import *
 
 
 class Program(Grammar):
+    grammar = ZERO_OR_MORE(REF('Function') | '\n')
+
+class Function(Grammar):
     grammar = (OPTIONAL(REF('LeftUnclosedString') | REF('LeftUnclosedList')),
-               ZERO_OR_MORE(REF('Data') | REF('Loop') | REF('Command')))
+               ZERO_OR_MORE(REF('Data') | REF('Loop') | REF('Command') | ' '))
 
 class Data(Grammar):
     grammar = REF('Number') | REF('Text') | REF('List')
@@ -43,7 +46,7 @@ class Complex(Grammar):
                'j')
 
 class Digit(Grammar):
-    grammar = OR('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
+    grammar = OR(*'0123456789')
 
 class Text(Grammar):
     grammar = REF('String') | REF('Character')
@@ -61,7 +64,7 @@ class RightUnclosedString(Grammar):
     grammar = ('«', ZERO_OR_MORE(REF('ValidCharacter')), EOF)
 
 class ValidCharacter(Grammar):
-    grammar = OR(('\\', OR('«', '»')), EXCEPT(ANY, OR('«', '»')))
+    grammar = OR(('\\', OR(*'«»')), EXCEPT(ANY, OR(*'«»')))
 
 class Character(Grammar):
     grammar = ('‹', ANY)
@@ -79,11 +82,13 @@ class RightUnclosedList(Grammar):
     grammar = ('[', ZERO_OR_MORE(REF('Data') | SPACE), EOF)
 
 class Loop(Grammar):
-    grammar = (OR('∞', '∀', '('), ZERO_OR_MORE(REF('Data') | REF('Loop') | REF('Command')), ')' | EOF)
+    grammar = (OR('∞', '∀', '(', '⟨', '⟩'),
+               ZERO_OR_MORE(REF('Data') | REF('Loop') | REF('Command')),
+               ')' | EOF)
 
 class Command(Grammar):
     grammar = OR(*'⌀⌁⌃⌄⌅⌆⌇⌈⌉⌊⌋⌂⌖⌜⌝⁰¹²³⁴⁵⁶⁷⁸⁹¤×⌑÷⌞⌟!"#$%&\'*+,-./:;<=>?@ABCDEF'
                   'GHIJKLMNOPQRSTUVWXYZ\^_`abcdefghijklmnopqrstuvwxyz{``}~⌐¬⌌'
-                  '⌍±⌔⌓○⌕⌤⊠⟨⌶⟩⌬∮⌙⌯⌎⌏∓⌰⌱⌽⌳⌲⌴≠≈≡⍂⌮⍅⍆⍑⍍⍦⍧∘⌾Δ⍋≎≤≀≥⍁⌭√Σ⍊⍔∝⍀⍉∇⍒⊢⊣≺≻'
-                  '⊲⊳⍬⍭⍳⍴⍵⋮⌿∴⊄∩⊅∈∋∧⊶⊷↕↑↔⋅⋱…⋰∵⊂∪⊃∉∌∨∥∦←↓→↖↗⊕⊖⊗⊘⊙⊜⋉⋈⋊⏚⇐↭⇒↙↘πσθλ'
-                  'μφΩ›')
+                  '⌍±⌔⌓○⌕⌤⊠⌶⌬∮⌙⌯⌎⌏∓⌰⌱⌽⌳⌲⌴≠≈≡⍂⌮⍅⍆⍑⍍⍦⍧∘⌾Δ⍋≎≤≀≥⍁⌭√Σ⍊⍔∝⍀⍉∇⍒⊢⊣≺≻⊲⊳'
+                  '⍬⍭⍳⍴⍵⋮⌿∴⊄∩⊅∈∋∧⊶⊷↕↑↔⋅⋱…⋰∵⊂∪⊃∉∌∨∥∦←↓→↖↗⊕⊖⊗⊘⊙⊜⋉⋈⋊⏚⇐↭⇒↙↘πσθλμφ'
+                  'Ω›')
