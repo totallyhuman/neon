@@ -79,7 +79,7 @@ class LeftUnclosedList(Grammar):
     grammar = (ZERO_OR_MORE(REF('Data') | SPACE), ']')
 
 class RightUnclosedList(Grammar):
-    grammar = ('[', ZERO_OR_MORE(REF('Data') | SPACE), EOF)
+    grammar = ('[', ZERO_OR_MORE(REF('Data') | SPACE), EOL)
 
 class Loop(Grammar):
     grammar = (OR('∞', '∀', '(', '⟨', '⟩'),
