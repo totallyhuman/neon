@@ -11,12 +11,13 @@ parser = argparse.ArgumentParser(
     add_help = True
 )
 
-parser.add_argument('-e', '--encoding',
+parser.add_argument('-u', '--utf-8',
                     action = 'store_true',
-                    help = 'read a Neon program in its custom code page')
+                    help = "read a Neon program in UTF-8 instead of Neon's custom "
+                           "code page")
 parser.add_argument('file',
                     help = 'file with Neon program to be read')
 
 args = parser.parse_args()
 
-neon.execute(open(args.file, mode = 'rb'), args.encoding)
+neon.execute(open(args.file, mode = 'rb'), args.utf8)
