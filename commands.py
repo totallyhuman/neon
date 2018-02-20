@@ -8,6 +8,11 @@ class Command:
     def __call__(self, stack):
         return func(stack)
 
+# Unused commands: ⌀⌁⌃⌄⌅⌆⌇⌈⌉⌊⌋⌂⌖⌜⌝¤×⌑÷⌞⌟!"#$%&\'*+,-./:;<=>?@ABCDEFGHIJKLMNOPQ
+#                  RSTUVWXYZ\^_`abcdefghijklmnopqrstuvwxyz{``}~⌐¬⌌⌍±⌔⌓○⌕⌤⊠⌶⌬∮⌙
+#                  ⌯⌎⌏∓⌰⌱⌽⌳⌲⌴≠≈≡⍂⌮⍅⍆⍑⍍⍦⍧∘⌾Δ⍋≎≤≀≥⍁⌭√Σ⍊⍔∝⍀⍉∇⍒⊢⊣≺≻⊲⊳⍬⍭⍳⍴⍵⋮⌿∴⊄∩⊅∈∋
+#                  ∧⊶⊷↕↑↔⋅⋱…⋰∵⊂∪⊃∉∌∨∥∦←↓→↖↗⊕⊖⊗⊘⊙⊜⋉⋈⋊⏚⇐↭⇒↙↘πσθλμφΩ›
+
 commands = {
 
 }

@@ -3,6 +3,7 @@
 
 from modgrammar import *
 
+import commands
 
 class Program(Grammar):
     grammar = ZERO_OR_MORE(REF('Function') | '\n')
@@ -87,8 +88,7 @@ class Loop(Grammar):
                ')' | EOL)
 
 class Command(Grammar):
-    grammar = OR(*'⌀⌁⌃⌄⌅⌆⌇⌈⌉⌊⌋⌂⌖⌜⌝⁰¹²³⁴⁵⁶⁷⁸⁹¤×⌑÷⌞⌟!"#$%&\'*+,-./:;<=>?@ABCDEF'
-                  'GHIJKLMNOPQRSTUVWXYZ\^_`abcdefghijklmnopqrstuvwxyz{``}~⌐¬⌌'
-                  '⌍±⌔⌓○⌕⌤⊠⌶⌬∮⌙⌯⌎⌏∓⌰⌱⌽⌳⌲⌴≠≈≡⍂⌮⍅⍆⍑⍍⍦⍧∘⌾Δ⍋≎≤≀≥⍁⌭√Σ⍊⍔∝⍀⍉∇⍒⊢⊣≺≻⊲⊳'
-                  '⍬⍭⍳⍴⍵⋮⌿∴⊄∩⊅∈∋∧⊶⊷↕↑↔⋅⋱…⋰∵⊂∪⊃∉∌∨∥∦←↓→↖↗⊕⊖⊗⊘⊙⊜⋉⋈⋊⏚⇐↭⇒↙↘πσθλμφ'
-                  'Ω›')
+    grammar = REF('FunctionCall') | OR(*commands.commands)
+
+class FunctionCall(Grammar):
+    grammar = WORD('⁰¹²³⁴⁵⁶⁷⁸⁹')
