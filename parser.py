@@ -88,7 +88,7 @@ class Loop(Grammar):
                ')' | EOL)
 
 class Command(Grammar):
-    grammar = REF('FunctionCall') | OR(*commands.commands)
+    grammar = OR(*commands.commands)
 
 class FunctionCall(Grammar):
     grammar = WORD('⁰¹²³⁴⁵⁶⁷⁸⁹')
