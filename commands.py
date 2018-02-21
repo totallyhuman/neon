@@ -8,10 +8,10 @@ class Command:
     def __call__(self, stack):
         return func(stack)
 
-# Unused commands: ⌀⌁⌃⌄⌅⌆⌇⌈⌉⌊⌋⌂⌖⌜⌝⁰¹²³⁴⁵⁶⁷⁸⁹¤×⌑÷⌞⌟!"#$%&\'*+,-./:;<=>?@ABCDEFG
-#                  HIJKLMNOPQRSTUVWXYZ\^_`abcdefghijklmnopqrstuvwxyz{``}~⌐¬⌌⌍±
-#                  ⌔⌓○⌕⌤⊠⌶⌬∮⌙⌯⌎⌏∓⌰⌱⌽⌳⌲⌴≠≈≡⍂⌮⍅⍆⍑⍍⍦⍧∘⌾Δ⍋≎≤≀≥⍁⌭√Σ⍊⍔∝⍀⍉∇⍒⊢⊣≺≻⊲⊳⍬⍭⍳
-#                  ⍴⍵⋮⌿∴⊄∩⊅∈∋∧⊶⊷↕↑↔⋅⋱…⋰∵⊂∪⊃∉∌∨∥∦←↓→↖↗⊕⊖⊗⊘⊙⊜⋉⋈⋊⏚⇐↭⇒↙↘πσθλμφΩ›
+# Unused commands: ⌀⌁⌃⌄⌅⌆⌇⌈⌉⌊⌋⌂⌖⌜⌝⁰¹²³⁴⁵⁶⁷⁸⁹¤×⌑÷⌞⌟!"#$%&'*+,-./:;<=>?@ABCDEFGH
+#                  IJKLMNOPQRSTUVWXYZ\^_`abcdefghijklmnopqrstuvwxyz{|}~⌐¬⌌⌍±⌔⌓
+#                  ○⌕⌤⊠⌶⌬∮⌙⌯⌎⌏∓⌰⌱⌽⌳⌲⌴≠≈≡⍂⌮⍅⍆⍑⍍⍦⍧∘⌾Δ⍋≎≤≀≥⍁⌭√Σ⍊⍔∝⍀⍉∇⍒⊢⊣≺≻⊲⊳⍬⍭⍳⍴⍵
+#                  ⋮⌿∴⊄∩⊅∈∋∧⊶⊷↕↑↔⋅⋱…⋰∵⊂∪⊃∉∌∨∥∦←↓→↖↗⊕⊖⊗⊘⊙⊜⋉⋈⋊⏚⇐↭⇒↙↘πσθλμφΩ›
 
 commands = {
 

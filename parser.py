@@ -80,7 +80,7 @@ class LeftUnclosedList(Grammar):
     grammar = (ZERO_OR_MORE(REF('Data') | SPACE), ']')
 
 class RightUnclosedList(Grammar):
-    grammar = ('[', ZERO_OR_MORE(REF('Data') | SPACE), EOL)
+    grammar = ('[', ZERO_OR_MORE(REF('Data') | SPACE), EOL | EOF)
 
 class Loop(Grammar):
     grammar = (OR('∞', '∀', '(', '⟨', '⟩'),
@@ -88,7 +88,10 @@ class Loop(Grammar):
                ')' | EOL)
 
 class Command(Grammar):
-    grammar = OR(*commands.commands)
+    grammar = OR(*'⌀⌁⌃⌄⌅⌆⌇⌈⌉⌊⌋⌂⌖⌜⌝⁰¹²³⁴⁵⁶⁷⁸⁹¤×⌑÷⌞⌟!"#$%&\'*+,-./:;<=>?@ABCDEF'
+                  'GHIJKLMNOPQRSTUVWXYZ\^_`abcdefghijklmnopqrstuvwxyz{|}~⌐¬⌌⌍'
+                  '±⌔⌓○⌕⌤⊠⌶⌬∮⌙⌯⌎⌏∓⌰⌱⌽⌳⌲⌴≠≈≡⍂⌮⍅⍆⍑⍍⍦⍧∘⌾Δ⍋≎≤≀≥⍁⌭√Σ⍊⍔∝⍀⍉∇⍒⊢⊣≺≻⊲⊳⍬'
+                  '⍭⍳⍴⍵⋮⌿∴⊄∩⊅∈∋∧⊶⊷↕↑↔⋅⋱…⋰∵⊂∪⊃∉∌∨∥∦←↓→↖↗⊕⊖⊗⊘⊙⊜⋉⋈⋊⏚⇐↭⇒↙↘πσθλμφΩ'
+                )
 
-class FunctionCall(Grammar):
-    grammar = WORD('⁰¹²³⁴⁵⁶⁷⁸⁹')
+parse = Program.parser().parse_string
