@@ -6,18 +6,20 @@ import argparse
 import neon
 
 parser = argparse.ArgumentParser(
-    prog = 'neon',
     description = 'Interpreter for the Neon golfing language.',
     add_help = True
 )
 
 parser.add_argument('-u', '--utf-8',
                     action = 'store_true',
-                    help = "read a Neon program in UTF-8 instead of Neon's custom "
-                           "code page")
+                    help = "read a Neon program in UTF-8 instead of Neon's "
+                           "custom code page")
+parser.add_argument('-v', '--verbose',
+                    action = 'store_true',
+                    help = 'enable verbose mode')
 parser.add_argument('file',
                     help = 'file with Neon program to be read')
 
 args = parser.parse_args()
 
-neon.execute(open(args.file, mode = 'rb'), args.utf8)
+neon.execute(open(args.file, mode = 'rb'), args.verbose, args.utf_8)
