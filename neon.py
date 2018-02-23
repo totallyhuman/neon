@@ -54,83 +54,74 @@ class Stack:
         
         return self.items[idx]
 
-State = collections.namedtuple('State', ['stack', 'functions', 'register'])
+def sanitize(string):
+    string = string.replace('"""', '\\"""')
+    string = string.replace('\\«', '«')
+    string = string.replace('\\»', '»')
 
-def parse_literal(literal):
-    str = literal.string
+    return string
 
-    if isinstance(literal, (parser.Data,
-                            parser.Number,
-                            parser.Text,
-                            parser.String,
-                            parser.Character,
-                            parser.List)):
-        return parse_literal(literal.elements[0])
+def neon_eval(literal):
+    string = literal.string
 
     if isinstance(literal, parser.Complex):
-        if str == 'j':
+        if string == 'j':
             return 1j
         
-        return ast.literal_eval(str)
+        return ast.literal_eval(string)
+
     if isinstance(literal, parser.ScientificNotation):
-        if str == 'e':
+        if string == 'e':
             return 1e2
         if literal.elements[0] is None:
-            return ast.literal_eval('1' + str)
+            return ast.literal_eval('1' + string)
         if literal.elements[2] is None:
-            return ast.literal_eval(str + '2')
+            return ast.literal_eval(string + '2')
         
-        return ast.literal_eval(str)
+        return ast.literal_eval(string)
+
     if isinstance(literal, parser.Float):
-        if str == '.':
+        if string == '.':
             return 0.5
-        if str == '-.':
+        if string == '-.':
             return -0.5
         
-        return ast.literal_eval(str)
+        return ast.literal_eval(string)
+
     if isinstance(literal, parser.Integer):
-        if str == '-':
+        if string == '-':
             return -1
         
-        return ast.literal_eval(str)
+        return ast.literal_eval(string)
+
     if isinstance(literal, parser.LeftUnclosedString):
-        str = str.replace('"""', '\\"""')
-        str = str.replace('\n', '\\n')
-        str = str.replace('\\«', '«')
-        str = str.replace('\\»', '»')
+        return ast.literal_eval('"""' + sanitize(string)[:-1] + '"""')
 
-        return ast.literal_eval('"""' + str[:-1] + '"""')
     if isinstance(literal, parser.RightUnclosedString):
-        str = str.replace('"""', '\\"""')
-        str = str.replace('\n', '\\n')
-        str = str.replace('\\«', '«')
-        str = str.replace('\\»', '»')
+        return ast.literal_eval('"""' + sanitize(string)[1:] + '"""')
 
-        return ast.literal_eval('"""' + str[1:] + '"""')
     if isinstance(literal, parser.ClosedString):
-        str = str.replace('"""', '\\"""')
-        str = str.replace('\n', '\\n')
-        str = str.replace('\\«', '«')
-        str = str.replace('\\»', '»')
+        return ast.literal_eval('"""' + sanitize(string)[1:-1] + '"""')
 
-        return ast.literal_eval('"""' + str[1:-1] + '"""')
     if isinstance(literal, parser.Character):
-        return str[1]
+        return string[1]
+
     if isinstance(literal, parser.LeftUnclosedList):
         ret = []
 
         for i in literal.elements[0].elements:
             if i.string != ' ':
-                ret.append(parse_literal(i))
+                ret.append(neon_eval(i))
         
         return ret
+
     if isinstance(literal, (parser.ClosedList, parser.RightUnclosedList)):
         ret = []
 
         for i in literal.elements[1].elements:
             if i.string != ' ':
-                ret.append(parse_literal(i))
+                ret.append(neon_eval(i))
         
         return ret
 
-    return state
+    return neon_eval(literal.elements[0])
