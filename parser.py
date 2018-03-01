@@ -94,4 +94,6 @@ class Command(Grammar):
                   '⍭⍳⍴⍵⋮⌿∴⊄∩⊅∈∋∧⊶⊷↕↑↔⋅⋱…⋰∵⊂∪⊃∉∌∨∥∦←↓→↖↗⊕⊖⊗⊘⊙⊜⋉⋈⋊⏚⇐↭⇒↙↘πσθλμφΩ'
                 )
 
-parse = Program.parser().parse_string
+parse_program  = Program.parser().parse_string
+parse_function = Function.parser().parse_string
+parse_literal  = Data.parser().parse_string
