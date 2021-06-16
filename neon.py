@@ -24,7 +24,7 @@ class Stack:
         while self.items:
             yield self.items.pop()
     
-    def __contains__(self):
+    def __contains__(self, i):
         return i in self.items
 
     def __repr__(self):

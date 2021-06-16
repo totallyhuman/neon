@@ -1,7 +1,5 @@
 # Neon
 
-[Discord](https://discord.gg/Kcv7am5) | [Chat.SE](https://chat.stackexchange.com/rooms/71094/neon)
-
 *Overloading must be the key to golf.*
 
 Neon is a stack-based golfing language written in Python 3.
@@ -25,7 +23,7 @@ Neon's code page aims to be mostly symbolic.
 | **4_** | `@` | `A` | `B` | `C` | `D` | `E` | `F` | `G` | `H` | `I` | `J` | `K` | `L` | `M` | `N` | `O` |
 | **5_** | `P` | `Q` | `R` | `S` | `T` | `U` | `V` | `W` | `X` | `Y` | `Z` | `[` | `\` | `]` | `^` | `_` |
 | **6_** | <code>\`</code> | `a` | `b` | `c` | `d` | `e` | `f` | `g` | `h` | `i` | `j` | `k` | `l` | `m` | `n` | `o` |
-| **7_** | `p` | `q` | `r` | `s` | `t` | `u` | `v` | `w` | `x` | `y` | `z` | `{` | `|` | `}` | `~` | `⌗` |
+| **7_** | `p` | `q` | `r` | `s` | `t` | `u` | `v` | `w` | `x` | `y` | `z` | `{` | `\|` | `}` | `~` | `⌗` |
 | **8_** | `⌐` | `¬` | `⌌` | `⌍` | `±` | `⌔` | `⌓` | `○` | `⌕` | `⌤` | `⊠` | `⟨` | `⌶` | `⟩` | `⌬` | `∮` |
 | **9_** | `⌙` | `⌯` | `⌎` | `⌏` | `∓` | `⌰` | `⌱` | `⌽` | `⌳` | `⌲` | `⌴` | `≠` | `≈` | `≡` | `⍂` | `⌮` |
 | **A_** | `⍅` | `⍆` | `⍑` | `⍍` | `⍦` | `⍧` | `∘` | `⌾` | `Δ` | `⍋` | `≎` | `≤` | `≀` | `≥` | `⍁` | `⌭` |

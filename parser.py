@@ -31,7 +31,7 @@ class ScientificNotation(Grammar):
     grammar = (OPTIONAL(Integer | Float), 'e', OPTIONAL(Integer | Float))
 
 class Complex(Grammar):
-    grammar = (OPTIONAL(Integer  | Float  | ScientificNotation), 'j')
+    grammar = (OPTIONAL(Integer | Float | ScientificNotation), 'j')
 
 class Number(Grammar):
     grammar = Complex | ScientificNotation | Float | Integer
