@@ -5,88 +5,6 @@ from modgrammar import *
 
 import commands
 
-class Program(Grammar):
-    grammar = ZERO_OR_MORE(REF('Function') | '\n')
-
-class Function(Grammar):
-    grammar = (OPTIONAL(REF('LeftUnclosedString') | REF('LeftUnclosedList')),
-               ZERO_OR_MORE(REF('Data') | REF('Loop') | REF('Command') | ' '))
-
-class Data(Grammar):
-    grammar = REF('Number') | REF('Text') | REF('List')
-
-class Number(Grammar):
-    grammar = REF('Complex') \
-            | REF('ScientificNotation') \
-            | REF('Float') \
-            | REF('Integer')
-
-class Integer(Grammar):
-    grammar = REF('PositiveInteger') | REF('NegativeInteger')
-
-class PositiveInteger(Grammar):
-    grammar = REPEAT(REF('Digit'))
-
-class NegativeInteger(Grammar):
-    grammar = ('-', ZERO_OR_MORE(REF('Digit')))
-
-class Float(Grammar):
-    grammar = (OPTIONAL(REF('Integer')),
-               '.',
-               OPTIONAL(REF('PositiveInteger')))
-
-class ScientificNotation(Grammar):
-    grammar = (OPTIONAL(REF('Integer') | REF('Float')),
-               'e',
-               OPTIONAL(REF('Integer') | REF('Float')))
-
-class Complex(Grammar):
-    grammar = (OPTIONAL(REF('Integer') \
-                      | REF('Float') \
-                      | REF('ScientificNotation')),
-               'j')
-
-class Digit(Grammar):
-    grammar = OR(*'0123456789')
-
-class Text(Grammar):
-    grammar = REF('String') | REF('Character')
-
-class String(Grammar):
-    grammar = REF('ClosedString') | REF('RightUnclosedString')
-
-class ClosedString(Grammar):
-    grammar = ('«', ZERO_OR_MORE(REF('ValidCharacter')), '»')
-
-class LeftUnclosedString(Grammar):
-    grammar = (ZERO_OR_MORE(REF('ValidCharacter')), '»')
-
-class RightUnclosedString(Grammar):
-    grammar = ('«', ZERO_OR_MORE(REF('ValidCharacter')), EOF)
-
-class ValidCharacter(Grammar):
-    grammar = OR(('\\', OR(*'«»')), EXCEPT(ANY, OR(*'«»')))
-
-class Character(Grammar):
-    grammar = ('‹', ANY)
-
-class List(Grammar):
-    grammar = REF('ClosedList') | REF('RightUnclosedList')
-
-class ClosedList(Grammar):
-    grammar = ('[', ZERO_OR_MORE(REF('Data') | SPACE), ']')
-
-class LeftUnclosedList(Grammar):
-    grammar = (ZERO_OR_MORE(REF('Data') | SPACE), ']')
-
-class RightUnclosedList(Grammar):
-    grammar = ('[', ZERO_OR_MORE(REF('Data') | SPACE), EOL | EOF)
-
-class Loop(Grammar):
-    grammar = (OR('∞', '∀', '(', '⟨', '⟩'),
-               ZERO_OR_MORE(REF('Data') | REF('Loop') | REF('Command')),
-               ')' | EOL)
-
 class Command(Grammar):
     grammar = OR(*'⌀⌁⌃⌄⌅⌆⌇⌈⌉⌊⌋⌂⌖⌜⌝⁰¹²³⁴⁵⁶⁷⁸⁹¤×⌑÷⌞⌟!"#$%&\'*+,-./:;<=>?@ABCDEF'
                   'GHIJKLMNOPQRSTUVWXYZ\^_`abcdefghijklmnopqrstuvwxyz{|}~⌐¬⌌⌍'
@@ -94,6 +12,77 @@ class Command(Grammar):
                   '⍭⍳⍴⍵⋮⌿∴⊄∩⊅∈∋∧⊶⊷↕↑↔⋅⋱…⋰∵⊂∪⊃∉∌∨∥∦←↓→↖↗⊕⊖⊗⊘⊙⊜⋉⋈⋊⏚⇐↭⇒↙↘πσθλμφΩ'
                 )
 
+class Digit(Grammar):
+    grammar = OR(*'0123456789')
+
+class PositiveInteger(Grammar):
+    grammar = REPEAT(Digit)
+
+class NegativeInteger(Grammar):
+    grammar = ('-', ZERO_OR_MORE(Digit))
+
+class Integer(Grammar):
+    grammar = PositiveInteger | NegativeInteger
+
+class Float(Grammar):
+    grammar = (OPTIONAL(Integer), '.', OPTIONAL(PositiveInteger))
+
+class ScientificNotation(Grammar):
+    grammar = (OPTIONAL(Integer | Float), 'e', OPTIONAL(Integer | Float))
+
+class Complex(Grammar):
+    grammar = (OPTIONAL(Integer  | Float  | ScientificNotation), 'j')
+
+class Number(Grammar):
+    grammar = Complex | ScientificNotation | Float | Integer
+
+class Character(Grammar):
+    grammar = ('‹', ANY)
+
+class ValidCharacter(Grammar):
+    grammar = OR(('\\', OR(*'«»')), EXCEPT(ANY, OR(*'«»')))
+
+class ClosedString(Grammar):
+    grammar = ('«', ZERO_OR_MORE(ValidCharacter), '»')
+
+class LeftUnclosedString(Grammar):
+    grammar = (ZERO_OR_MORE(ValidCharacter), '»')
+
+class RightUnclosedString(Grammar):
+    grammar = ('«', ZERO_OR_MORE(ValidCharacter), EOF)
+
+class String(Grammar):
+    grammar = ClosedString | RightUnclosedString
+
+class Text(Grammar):
+    grammar = String | Character
+
+class ClosedList(Grammar):
+    grammar = ('[', ZERO_OR_MORE(REF('Literal') | SPACE), ']')
+
+class LeftUnclosedList(Grammar):
+    grammar = (ZERO_OR_MORE(REF('Literal') | SPACE), ']')
+
+class RightUnclosedList(Grammar):
+    grammar = ('[', ZERO_OR_MORE(REF('Literal') | SPACE), EOL | EOF)
+
+class List(Grammar):
+    grammar = ClosedList | RightUnclosedList
+
+class Literal(Grammar):
+    grammar = Number | Text | List
+
+class Loop(Grammar):
+    grammar = (OR('∞', '∀', '(', '⟨', '⟩'),
+               ZERO_OR_MORE(Literal | REF('Loop') | Command), ')' | EOL)
+
+class Function(Grammar):
+    grammar = (OPTIONAL(LeftUnclosedString | LeftUnclosedList),
+               ZERO_OR_MORE(Literal | Loop | Command | ' '))
+
+class Program(Grammar):
+    grammar = ZERO_OR_MORE(Function | '\n')
+
 parse_program  = Program.parser().parse_string
 parse_function = Function.parser().parse_string
-parse_literal  = Data.parser().parse_string
+parse_literal  = Literal.parser().parse_string
